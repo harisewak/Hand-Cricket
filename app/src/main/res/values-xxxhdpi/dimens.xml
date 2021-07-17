@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="margin_number_btn">8dp</dimen>
+    <dimen name="size_number_btn">96dp</dimen>
+    <dimen name="margin_between_events">4dp</dimen>
+    <dimen name="padding_item_event">4dp</dimen>
+    <dimen name="padding_score_board">8dp</dimen>
+</resources>

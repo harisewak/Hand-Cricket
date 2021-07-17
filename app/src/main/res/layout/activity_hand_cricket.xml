@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.HandCricketActivity"
+    android:animateLayoutChanges="true">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            tools:visibility="gone"
+            android:id="@+id/ll_decision_btns"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_large"
+                android:layout_margin="@dimen/margin_number_btn"
+                android:id="@+id/bt_no"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="No"/>
+
+            <Button
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_large"
+                android:layout_margin="@dimen/margin_number_btn"
+                android:id="@+id/bt_yes"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Yes"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            tools:visibility="visible"
+            android:visibility="gone"
+            android:id="@+id/ll_number_btns"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/bt_one"
+                android:textSize="@dimen/text_size_large"
+                android:layout_margin="@dimen/margin_number_btn"
+                android:layout_width="@dimen/size_number_btn"
+                android:layout_height="@dimen/size_number_btn"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/bt_two"
+                android:textSize="@dimen/text_size_large"
+                android:layout_margin="@dimen/margin_number_btn"
+                android:layout_width="@dimen/size_number_btn"
+                android:layout_height="@dimen/size_number_btn"
+                android:text="2" />
+
+            <Button
+                android:id="@+id/bt_three"
+                android:textSize="@dimen/text_size_large"
+                android:layout_margin="@dimen/margin_number_btn"
+                android:layout_width="@dimen/size_number_btn"
+                android:layout_height="@dimen/size_number_btn"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/bt_four"
+                android:textSize="@dimen/text_size_large"
+                android:layout_margin="@dimen/margin_number_btn"
+                android:layout_width="@dimen/size_number_btn"
+                android:layout_height="@dimen/size_number_btn"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/bt_five"
+                android:textSize="@dimen/text_size_large"
+                android:layout_margin="@dimen/margin_number_btn"
+                android:layout_width="@dimen/size_number_btn"
+                android:layout_height="@dimen/size_number_btn"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/bt_six"
+                android:textSize="@dimen/text_size_large"
+                android:layout_margin="@dimen/margin_number_btn"
+                android:layout_width="@dimen/size_number_btn"
+                android:layout_height="@dimen/size_number_btn"
+                android:text="6" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:padding="@dimen/padding_score_board"
+        android:id="@+id/linearLayout"
+        android:layout_width="200dp"
+        android:layout_height="120dp"
+        android:gravity="start"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_small"
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Scoreboard View" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/tv_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large"
+            tools:text="Welcome to Hand Cricket! Shall we begin?" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_events"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:padding="@dimen/padding_score_board"
+            android:id="@+id/tv_events_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large"
+            android:text="Recent Events" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_events"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_event"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

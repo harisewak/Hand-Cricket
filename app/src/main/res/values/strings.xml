@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Hand Cricket</string>
+    <string name="title_activity_test">TestActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="text_choose_odd_even">Welcome to Hand cricket! Choose odd or even</string>
+    <string name="text_btn_odd">Odd</string>
+    <string name="text_btn_even">Even</string>
+    <string name="text_select_toss_num">Select a number for toss</string>
+    <string name="text_btn_bat">Bat</string>
+    <string name="text_btn_bowl">Bowl</string>
+    <string name="text_btn_yes">Yes</string>
+    <string name="text_btn_no">No</string>
+    <string name="text_select_bat_or_bowl">Select batting or bowling</string>
+    <string name="text_select_play_num">Select a number for playing</string>
+    <string name="text_play_again">Great game! Play again?</string>
+</resources>
