@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -12,8 +13,12 @@ import com.harisewak.handcricket.databinding.ActivityHandCricketBinding
 import com.harisewak.handcricket.databinding.ItemEventBinding
 import com.harisewak.handcricket.domain.PromptType
 import com.harisewak.handcricket.presenter.HandCricketPresenter
+import com.harisewak.handcricket.util.debug
 import com.harisewak.handcricket.util.hide
 import com.harisewak.handcricket.util.show
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.ArrayList
 
 class HandCricketActivity : AppCompatActivity(), HandCricketPresenter.View {
@@ -32,7 +37,9 @@ class HandCricketActivity : AppCompatActivity(), HandCricketPresenter.View {
 
         initAdapter()
 
-        presenter.start(this)
+        lifecycleScope.launch(Dispatchers.Default) {
+            presenter.start(this@HandCricketActivity)
+        }
 
     }
 
@@ -45,56 +52,93 @@ class HandCricketActivity : AppCompatActivity(), HandCricketPresenter.View {
 
     private fun setListeners() {
         binding.btYes.setOnClickListener {
-            when (presenter.promptType) {
-                PromptType.CHOOSE_ODD_EVEN -> presenter.userSelectedOdd()
-                PromptType.CHOOSE_BAT_BOWL -> presenter.userSelectedBatting()
-                PromptType.PLAY_AGAIN -> presenter.restart()
+            lifecycleScope.launch(Dispatchers.Default) {
+                debug("Current thread: ${Thread.currentThread().name}")
+                when (presenter.promptType) {
+                    PromptType.CHOOSE_ODD_EVEN -> presenter.userSelectedOdd()
+                    PromptType.CHOOSE_BAT_BOWL -> presenter.userSelectedBatting()
+                    PromptType.PLAY_AGAIN -> presenter.restart()
+                }
+
             }
         }
         binding.btNo.setOnClickListener {
-            when (presenter.promptType) {
-                PromptType.CHOOSE_ODD_EVEN -> presenter.userSelectedEven()
-                PromptType.CHOOSE_BAT_BOWL -> presenter.userSelectedBowling()
-                PromptType.PLAY_AGAIN -> presenter.stop()
+            lifecycleScope.launch(Dispatchers.Default) {
+                debug("Current thread: ${Thread.currentThread().name}")
+                when (presenter.promptType) {
+                    PromptType.CHOOSE_ODD_EVEN -> presenter.userSelectedEven()
+                    PromptType.CHOOSE_BAT_BOWL -> presenter.userSelectedBowling()
+                    PromptType.PLAY_AGAIN -> presenter.stop()
+                }
             }
         }
         binding.btOne.setOnClickListener {
-            presenter.userSelectedNumber(1)
+            lifecycleScope.launch(Dispatchers.Default) {
+                debug("Current thread: ${Thread.currentThread().name}")
+                presenter.userSelectedNumber(1)
+            }
         }
         binding.btTwo.setOnClickListener {
-            presenter.userSelectedNumber(2)
+            lifecycleScope.launch(Dispatchers.Default) {
+                debug("Current thread: ${Thread.currentThread().name}")
+                presenter.userSelectedNumber(2)
+            }
         }
         binding.btThree.setOnClickListener {
-            presenter.userSelectedNumber(3)
+            lifecycleScope.launch(Dispatchers.Default) {
+                debug("Current thread: ${Thread.currentThread().name}")
+                presenter.userSelectedNumber(3)
+            }
         }
         binding.btFour.setOnClickListener {
-            presenter.userSelectedNumber(4)
+            lifecycleScope.launch(Dispatchers.Default) {
+                debug("Current thread: ${Thread.currentThread().name}")
+                presenter.userSelectedNumber(4)
+            }
         }
         binding.btFive.setOnClickListener {
-            presenter.userSelectedNumber(5)
+            lifecycleScope.launch(Dispatchers.Default) {
+                debug("Current thread: ${Thread.currentThread().name}")
+                presenter.userSelectedNumber(5)
+            }
         }
         binding.btSix.setOnClickListener {
-            presenter.userSelectedNumber(6)
+            lifecycleScope.launch(Dispatchers.Default) {
+                debug("Current thread: ${Thread.currentThread().name}")
+                presenter.userSelectedNumber(6)
+            }
         }
     }
 
     // start of the game
-    override fun showOddOrEvenPrompt() {
-        binding.tvScore.text = ""
-        eventListAdapter.clear()
-        binding.tvPrompt.show()
-        binding.tvPrompt.text = getString(R.string.text_choose_odd_even)
-        showOddEvenButtons()
+    override suspend fun showOddOrEvenPrompt() {
+        withContext(Dispatchers.Main) {
+            debug("Current thread: ${Thread.currentThread().name}")
+            binding.tvScore.text = ""
+            eventListAdapter.clear()
+            binding.tvPrompt.show()
+            binding.tvPrompt.text = getString(R.string.text_choose_odd_even)
+            showOddEvenButtons()
+
+        }
     }
 
-    override fun shutdown() {
-        finish()
+    override suspend fun shutdown() {
+        withContext(Dispatchers.Main) {
+            debug("Current thread: ${Thread.currentThread().name}")
+            finish()
+
+        }
     }
 
-    override fun showSelectNumberForTossPrompt() {
-        binding.tvPrompt.show()
-        binding.tvPrompt.text = getString(R.string.text_select_toss_num)
-        showNumPad()
+    override suspend fun showSelectNumberForTossPrompt() {
+        withContext(Dispatchers.Main) {
+            debug("Current thread: ${Thread.currentThread().name}")
+            binding.tvPrompt.show()
+            binding.tvPrompt.text = getString(R.string.text_select_toss_num)
+            showNumPad()
+
+        }
     }
 
     private fun showNumPad() {
@@ -102,32 +146,52 @@ class HandCricketActivity : AppCompatActivity(), HandCricketPresenter.View {
         binding.llDecisionBtns.hide()
     }
 
-    override fun showBatOrBowlPrompt() {
-        binding.tvPrompt.show()
-        binding.tvPrompt.text = getString(R.string.text_select_bat_or_bowl)
-        showBatBowlButtons()
+    override suspend fun showBatOrBowlPrompt() {
+        withContext(Dispatchers.Main) {
+            debug("Current thread: ${Thread.currentThread().name}")
+            binding.tvPrompt.show()
+            binding.tvPrompt.text = getString(R.string.text_select_bat_or_bowl)
+            showBatBowlButtons()
+
+        }
     }
 
-    override fun showSelectNumberForPlayingPrompt() {
-        binding.tvPrompt.show()
-        binding.tvPrompt.text = getString(R.string.text_select_play_num)
-        showNumPad()
+    override suspend fun showSelectNumberForPlayingPrompt() {
+        withContext(Dispatchers.Main) {
+            debug("Current thread: ${Thread.currentThread().name}")
+            binding.tvPrompt.show()
+            binding.tvPrompt.text = getString(R.string.text_select_play_num)
+            showNumPad()
+
+        }
     }
 
-    override fun updateScore(score: String) {
-        binding.tvScore.text = score
+    override suspend fun updateScore(score: String) {
+        withContext(Dispatchers.Main) {
+            debug("Current thread: ${Thread.currentThread().name}")
+            binding.tvScore.text = score
+
+        }
     }
 
-    override fun showPlayAgainPrompt() {
-        binding.tvPrompt.show()
-        binding.tvPrompt.text = getString(R.string.text_play_again)
-        showPlayAgainButtons()
+    override suspend fun showPlayAgainPrompt() {
+        withContext(Dispatchers.Main) {
+            debug("Current thread: ${Thread.currentThread().name}")
+            binding.tvPrompt.show()
+            binding.tvPrompt.text = getString(R.string.text_play_again)
+            showPlayAgainButtons()
+
+        }
     }
 
-    override fun updateEventRecord(event: String) {
-        eventListAdapter.add(event)
-        val lastPos = eventListAdapter.itemCount - 1
-        binding.rvEvents.scrollToPosition(lastPos)
+    override suspend fun updateEventRecord(event: String) {
+        withContext(Dispatchers.Main) {
+            debug("Current thread: ${Thread.currentThread().name}")
+            eventListAdapter.add(event)
+            val lastPos = eventListAdapter.itemCount - 1
+            binding.rvEvents.scrollToPosition(lastPos)
+
+        }
     }
 
     private fun showOddEvenButtons() {

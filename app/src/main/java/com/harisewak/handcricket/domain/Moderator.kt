@@ -43,7 +43,7 @@ object Moderator {
         private set
 
     // The entry point of the game
-    fun startGame() {
+    suspend fun startGame() {
         promptType = PromptType.CHOOSE_ODD_EVEN
         presenter.showOddEvenPrompt()
     }
@@ -56,7 +56,7 @@ object Moderator {
         gameState.computerWicketsFallen = 0
     }
 
-    fun postUserResponse(userResponse: PlayerResponse) {
+    suspend fun postUserResponse(userResponse: PlayerResponse) {
         gameState.userResponse = userResponse
         when (userResponse) {
             Odd -> {
@@ -109,7 +109,7 @@ object Moderator {
         }
     }
 
-    private fun processSelectedNumber(userResponse: PlayerResponse) {
+    private suspend fun processSelectedNumber(userResponse: PlayerResponse) {
 
         if (promptType == PromptType.CHOOSE_NUMBER_FOR_TOSS) {
 
@@ -122,7 +122,7 @@ object Moderator {
         }
     }
 
-    private fun processPlayResponse(userResponse: PlayerResponse) {
+    private suspend fun processPlayResponse(userResponse: PlayerResponse) {
 
         val compResponse = computer.chooseNumber()
 
@@ -278,7 +278,7 @@ object Moderator {
 
     }
 
-    private fun processTossResponse(userResponse: PlayerResponse) {
+    private suspend fun processTossResponse(userResponse: PlayerResponse) {
 
         val compResponse = computer.chooseNumber()
 
@@ -305,7 +305,7 @@ object Moderator {
         }
     }
 
-    private fun initScoreBoard(playerResponse: PlayerResponse) {
+    private suspend fun initScoreBoard(playerResponse: PlayerResponse) {
 
         if (gameState.tossWinner == User) {
 
